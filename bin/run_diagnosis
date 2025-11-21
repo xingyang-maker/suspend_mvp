@@ -8,6 +8,12 @@ import argparse
 import subprocess
 import sys
 from pathlib import Path
+import os
+
+# Add the src directory to the Python path so we can import the package
+script_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.join(os.path.dirname(script_dir), 'src')
+sys.path.insert(0, src_dir)
 
 
 def parse_args():
@@ -41,21 +47,27 @@ def main():
     """Main function."""
     args = parse_args()
     
-    # Build command
-    cmd = [sys.executable, "main.py"]
+    # Import the main module from our package
+    from suspend_diagnosis.main import main as suspend_main
+    from suspend_diagnosis.cli import build_parser
     
+    # Build the argument parser and parse the arguments
+    parser = build_parser()
+    suspend_args = parser.parse_args([])
+    
+    # Set the arguments based on the command-line options
     if args.device:
-        cmd.extend(["--device", args.device])
+        suspend_args.device = args.device
     
     if args.output:
-        cmd.extend(["--out", args.output])
+        suspend_args.out = args.output
     
     if args.ftrace:
-        cmd.append("--collect-ftrace")
+        suspend_args.collect_ftrace = True
     
-    # Run the command
-    print(f"Running: {' '.join(cmd)}")
-    subprocess.run(cmd)
+    # Run the main function
+    print(f"Running suspend diagnosis with device={suspend_args.device}, output={suspend_args.out}")
+    suspend_main(suspend_args)
     
     # Find the most recent report
     output_dir = Path(args.output)

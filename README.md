@@ -33,10 +33,30 @@ This tool helps diagnose Android suspend-related issues by:
 
 ## Installation
 
+### Option 1: Install as a Package (Recommended)
+
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/android-suspend-diagnosis.git
-   cd android-suspend-diagnosis
+   git clone https://github.com/xingyang-maker/suspend_mvp.git
+   cd suspend_mvp
+   ```
+
+2. Install the package:
+   ```bash
+   pip install -e .
+   ```
+
+3. After installation, you can run the tool from anywhere:
+   ```bash
+   suspend-diagnosis
+   ```
+
+### Option 2: Run Directly from Source
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/xingyang-maker/suspend_mvp.git
+   cd suspend_mvp
    ```
 
 2. Install required packages:
@@ -44,12 +64,23 @@ This tool helps diagnose Android suspend-related issues by:
    pip install -r requirements.txt
    ```
 
+3. Run the tool using Python:
+   ```bash
+   python bin/suspend_diagnosis
+   ```
+
 ## Usage
 
-Basic usage:
+Basic usage (if installed as package):
 
 ```bash
-python main.py
+suspend-diagnosis
+```
+
+Or using the convenience script:
+
+```bash
+python bin/run_diagnosis
 ```
 
 This will collect logs from the default connected device and generate a report in the `./reports` directory.
@@ -57,7 +88,7 @@ This will collect logs from the default connected device and generate a report i
 ### Command-line Options
 
 ```
-usage: main.py [-h] [--adb ADB] [--device DEVICE] [--out OUT] [--ai-endpoint AI_ENDPOINT] [--collect-ftrace]
+usage: suspend-diagnosis [-h] [--adb ADB] [--device DEVICE] [--out OUT] [--ai-endpoint AI_ENDPOINT] [--collect-ftrace]
 
 Android Suspend Diagnosis Tool
 
@@ -75,17 +106,22 @@ options:
 
 Collect logs from a specific device:
 ```bash
-python main.py --device DEVICE_SERIAL_NUMBER
+suspend-diagnosis --device DEVICE_SERIAL_NUMBER
+```
+
+Or using the convenience script:
+```bash
+python bin/run_diagnosis --device DEVICE_SERIAL_NUMBER
 ```
 
 Specify a custom output directory:
 ```bash
-python main.py --out /path/to/output/directory
+suspend-diagnosis --out /path/to/output/directory
 ```
 
 Collect additional ftrace data:
 ```bash
-python main.py --collect-ftrace
+suspend-diagnosis --collect-ftrace
 ```
 
 ## Report Structure
@@ -103,19 +139,33 @@ The generated reports include:
 
 ```
 .
-├── main.py                 # Main entry point
-├── cli.py                  # Command-line interface definition
-├── core/                   # Core functionality
-│   ├── collector.py        # Log collection from Android devices
-│   ├── analyzer.py         # Log analysis and suspend failure detection
-│   ├── ai.py               # AI-powered analysis using QGenie
-│   ├── utils.py            # Utility functions
-│   └── report/             # Report generation
-│       ├── markdown_builder.py  # Markdown report generation
-│       └── html_renderer.py     # HTML report generation with charts
-├── models/                 # Data models
-│   └── types.py            # Type definitions
-└── reports/                # Generated reports (default location)
+├── src/                    # Source code directory
+│   └── suspend_diagnosis/  # Main package
+│       ├── __init__.py     # Package initialization
+│       ├── main.py         # Main functionality
+│       ├── cli.py          # Command-line interface definition
+│       ├── core/           # Core functionality
+│       │   ├── __init__.py
+│       │   ├── collector.py # Log collection from Android devices
+│       │   ├── analyzer.py # Log analysis and suspend failure detection
+│       │   ├── ai.py       # AI-powered analysis using QGenie
+│       │   ├── utils.py    # Utility functions
+│       │   └── report/     # Report generation
+│       │       ├── __init__.py
+│       │       ├── markdown_builder.py # Markdown report generation
+│       │       └── html_renderer.py    # HTML report generation with charts
+│       └── models/         # Data models
+│           ├── __init__.py
+│           └── types.py    # Type definitions
+├── bin/                    # Executable scripts
+│   ├── suspend_diagnosis   # Main entry point script
+│   └── run_diagnosis       # Convenience script
+├── reports/                # Generated reports (default location)
+├── README.md               # Documentation
+├── requirements.txt        # Dependencies
+├── setup.py                # Package installation script
+├── LICENSE                 # License file
+└── .gitignore              # Git ignore file
 ```
 
 ## License

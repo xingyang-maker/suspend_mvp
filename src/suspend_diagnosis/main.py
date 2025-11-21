@@ -7,15 +7,16 @@ It generates both Markdown and HTML reports with analysis results.
 """
 
 import argparse
+import sys
 from pathlib import Path
 
-from core.collector import AdbEvidenceCollector
-from core.analyzer import SimpleAnalyzer
-from core.ai import QGenieReporter
-from core.report.markdown_builder import MarkdownBuilder
-from core.report.html_renderer import HtmlRenderer
-from cli import build_parser
-from models.types import LogMap
+from suspend_diagnosis.core.collector import AdbEvidenceCollector
+from suspend_diagnosis.core.analyzer import SimpleAnalyzer
+from suspend_diagnosis.core.ai import QGenieReporter
+from suspend_diagnosis.core.report.markdown_builder import MarkdownBuilder
+from suspend_diagnosis.core.report.html_renderer import HtmlRenderer
+from suspend_diagnosis.cli import build_parser
+from suspend_diagnosis.models.types import LogMap
 
 def main(args):
     """
@@ -70,8 +71,14 @@ def main(args):
     html_path = html_renderer.render(md_path, top_ws)
     
     print(f"\n[REPORT] Generated: {html_path}")
+    return html_path
 
-if __name__ == "__main__":
+
+def main_cli():
+    """
+    Entry point for the command-line interface.
+    This function is used by the setup.py entry_points.
+    """
     parser = build_parser()
     args = parser.parse_args()
     main(args)
