@@ -1,7 +1,7 @@
 # Suspend Diagnosis Report
 
-**Collection Directory**: `C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\blocked_bywakelock`  
-**Time**: 2025-11-23T17:32:17.846676
+**Collection Directory**: `C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\suspend\blocked_bywakelock`  
+**Time**: 2025-11-23T17:48:26.691555
 
 ---
 
@@ -57,65 +57,88 @@
 
 ## 🤖 AI Comprehensive Analysis
 
-## Suspend Status
-- **/d/suspend_stats** – No data was provided (empty).  
-- **dumpsys suspend_control_internal** – The “Suspend Stats” section shows **`success: 0`**, **`fail: 0`**, and **`suspend attempts: 0`**.  
-- **Interpretation:** The device has **never successfully entered suspend** since the last boot. No suspend attempts have been recorded, indicating that something is actively preventing the system from reaching the suspend state.
+**## Suspend Status**  
+- `/d/suspend_stats` is empty, so no kernel‑level statistics are available.  
+- The `dumpsys suspend_control_internal` section shows **no suspend attempts** have been recorded (`suspend attempts: 0`).  
+- All counters for successes/failures are **0** (`success: 0`, `fail: 0`).  
+- **Conclusion:** The device is **not entering suspend at all**.
 
 ---
 
-## Wakelock Analysis
-| Type | Name / Description | PID | Status | Active Since |
-|------|--------------------|-----|--------|--------------|
-| **PowerManager (Native)** | `PowerManager.Service.Display` | 1922 | **Active** | ~1 090 043 ms ago |
-| **PowerManager (Native)** | `PowerManager.SuspendLockout` | 1922 | **Active** | ~1 090 043 ms ago |
-| **Kernel** | `a600000.hsusb` (USB HSUSB controller) | — | **Active** | ~80 272 ms ago |
+**## Wakelock Analysis**  
+The wakelock table from `dumpsys suspend_control_internal` reveals several **active** locks that are currently preventing suspend:
 
-All other wakelocks listed are **Inactive**.  
-The two active **PowerManager** wakelocks (`Display` and `SuspendLockout`) together with the active **USB** kernel wakelock are the **only blockers** that are keeping the system from suspending.
+| Name                               | Type   | Status   | Active Count | Total Time |
+|------------------------------------|--------|----------|--------------|------------|
+| **PowerManager.Service.Display**   | Native | **Active** | 1            | 941 874 ms |
+| **PowerManager.SuspendLockout**    | Native | **Active** | 1            | 941 839 ms |
+| **a600000.hsusb** (USB)            | Kernel | **Active** | 1            | 1 018 798 ms |
 
-`last_failed_suspend` counters are **zero**, confirming that the suspend path never even started because the system was already considered “busy” by the active wakelocks.
+- **Display wakelock** – the screen is on (or a “stay‑awake while charging” setting is enabled).  
+- **SuspendLockout** – a system‑level lock that deliberately blocks suspend (often set by a developer option, a debugging tool, or a misbehaving app).  
+- **USB (hsusb) wakelock** – a USB‑related wake lock, typically held while a USB cable is attached, USB debugging is active, or a peripheral driver is busy.
+
+No other wakelocks are active; the rest are **Inactive**.
+
+Because active wakelocks are present, the system cannot proceed to suspend, which explains the zero suspend attempts.
 
 ---
 
-## Root Cause (if applicable)
-**Not applicable** – suspend failures are not due to kernel errors or driver problems; they are being prevented by active wakelocks.
+**## Root Cause (not applicable)**  
+A root‑cause analysis of `dmesg` is **not required** here because suspend failures are directly attributable to active wakelocks.
 
 ---
 
-## Recommendations
-1. **Identify the source of the `Display` wakelock**  
-   - This wakelock is held by the system UI when the screen is on.  
-   - Ensure the display is turned **off** (press the power button or let the screen timeout expire).  
-   - If the screen stays on indefinitely, look for an app that is forcing the screen to stay awake (e.g., “Stay awake while charging”, developer options, video playback, navigation apps, or a misbehaving foreground service).
+**## Recommendations**
 
-2. **Investigate the `SuspendLockout` wakelock**  
-   - `SuspendLockout` is a system‑level lock that the framework sets when a component explicitly asks the system not to suspend (often during critical operations like OTA updates, camera usage, or heavy I/O).  
-   - Check recent logs (`logcat -b all -d | grep -i suspendlockout`) to see which process requested it.  
-   - If it is held for an unusually long time, consider rebooting the device or stopping the offending service/app.
+1. **Turn off the display / disable “Stay awake”**
+   - Settings → Developer options → **Stay awake (Screen will never sleep while charging)** – make sure this is **unchecked**.
+   - Manually turn off the screen or let it time‑out.
 
-3. **Address the active USB wakelock (`a600000.hsusb`)**  
-   - The USB controller stays awake when a USB device is connected or when USB debugging is active.  
-   - **Disconnect any USB cable** (including chargers that expose data lines) and verify that the wakelock disappears.  
-   - If you need the device plugged in, enable **“USB charging only”** mode (disable file transfer, tethering, or debugging) to allow the USB subsystem to release the lock.
+2. **Identify and clear the `PowerManager.SuspendLockout`**
+   - This lock is usually set by:
+     - **Developer options** – “Enable wake‑lock debugging” or “Force keep‑awake”.
+     - **Battery‑optimisation** tools or third‑party apps that request a suspend lock.
+   - Steps:
+     1. Re‑boot the device into **Safe Mode** (press power button, then long‑press “Power off” → “Reboot to safe mode”).  
+        - If the lock disappears, a third‑party app is responsible; uninstall or update the offending app.  
+     2. If it persists, clear it via **adb** (requires root or appropriate permissions):
+        ```bash
+        adb shell dumpsys power | grep SuspendLockout
+        # To release (if you have permission):
+        adb shell su -c "echo 0 > /sys/power/wakeup_count"
+        ```
+     3. Check for any **system services** that may have called `PowerManager.acquireSuspendLock()` (e.g., certain OEM power‑saving or performance‑tuning apps). Disable or update them.
 
-4. **General steps to force a clean suspend**  
-   - **Reboot** the device after clearing the above conditions; this resets any lingering wakelocks.  
-   **or**  
-   - Use `adb shell dumpsys power` to manually release a wakelock (e.g., `adb shell dumpsys power release [wakelock_name]`) **only if you are certain the lock is not needed**.
+3. **Clear the USB wake lock**
+   - Disconnect any USB cable or peripheral.
+   - Disable **USB debugging** (Settings → Developer options → USB debugging) if not needed.
+   - If the lock remains while the cable is unplugged, a driver may be stuck; a quick reboot usually clears it.
 
-5. **Monitor after changes**  
-   - Run `adb shell dumpsys suspend_control_internal` again.  
-   - You should see `success` increment and `suspend attempts` > 0, with no active PowerManager wakelocks.  
-   - Verify that `/d/suspend_stats` now shows non‑zero success counts.
+4. **Verify with `dumpsys` after changes**
+   - Run:
+     ```bash
+     adb shell dumpsys suspend_control_internal
+     ```
+   - Ensure **no active wakelocks** remain (all entries should show `Inactive`).
 
-By clearing the active display, suspend‑lockout, and USB wakelocks, the system will be able to enter deep suspend, and the suspend statistics will start reflecting successful suspend cycles. If after all of the above the device still never attempts suspend, revisit the kernel logs (`dmesg`) for hidden driver errors, but the current data points clearly to wakelock‑based blockage.
+5. **Test suspend functionality**
+   - Force a suspend manually:
+     ```bash
+     adb shell echo mem > /sys/power/state
+     ```
+   - If the device enters suspend (screen turns off, no wake‑up for a few seconds), the issue is resolved.
+
+6. **Monitor for recurrence**
+   - Keep an eye on `/d/suspend_stats` (or `cat /sys/kernel/debug/power/suspend_stats` on newer kernels) to confirm that suspend attempts and successes start occurring after the fixes.
+
+By clearing the active display, suspend‑lockout, and USB wake locks, the system should be able to enter suspend normally, and the suspend statistics will begin to show successful suspend cycles.
 
 ---
 
 ## 📁 Evidence Files
 
-- **dumpsys_suspend.txt**: `C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\blocked_bywakelock\dumpsys_suspend.txt`
+- **dumpsys_suspend.txt**: `C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\suspend\blocked_bywakelock\dumpsys_suspend.txt`
 
 ---
 

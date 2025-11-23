@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""
+Android Wakeup Diagnosis Tool
+
+Entry point for diagnosing Android device wakeup issues.
+"""
+import sys
+from pathlib import Path
+
+# Add the source directory to Python path
+src_dir = Path(__file__).parent.parent / "src"
+sys.path.insert(0, str(src_dir))
+
+# Import and run the wakeup diagnosis main function
+from wakeup_diagnosis.wakeup_main import main
+from wakeup_diagnosis.wakeup_cli import parse_args
+
+if __name__ == "__main__":
+    try:
+        args = parse_args()
+        main(args)
+    except KeyboardInterrupt:
+        print("\n⚠️  Operation cancelled by user")
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        if hasattr(args, 'verbose') and args.verbose:
+            import traceback
+            traceback.print_exc()
+        sys.exit(1)
