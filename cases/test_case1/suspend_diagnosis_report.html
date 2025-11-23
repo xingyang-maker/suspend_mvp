@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspend Diagnosis Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a202c;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        h2 {
+            color: #2d3748;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 6px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #4a5568;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        code {
+            background: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #e53e3e;
+        }
+        
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            background: white;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        th {
+            background: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        .status-success {
+            color: #38a169;
+            font-weight: bold;
+        }
+        
+        .status-failure {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+        
+        .section-card {
+            background: #f7fafc;
+            border-left: 4px solid #3182ce;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .finding-item {
+            background: #fff5f5;
+            border-left: 3px solid #fc8181;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 3px;
+        }
+        
+        .finding-item.normal {
+            background: #f0fff4;
+            border-left-color: #68d391;
+        }
+        
+        .ai-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .checklist {
+            background: #fffaf0;
+            border: 2px solid #ed8936;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .checklist li {
+            padding: 0.5rem 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<h1>Suspend Diagnosis Report</h1>
+<p><strong>Collection Directory</strong>: <code>C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\test_case1</code><br />
+<strong>Time</strong>: 2025-11-23T16:58:11.504769</p>
+<hr />
+<h2>🔴 CONCLUSION: Suspend Failure Detected</h2>
+<p><strong>Root Cause</strong>: Root cause: Active wakelocks preventing suspend: PowerManagerService.Display, PowerManager.SuspendLockout, a600000.hsusb</p>
+<hr />
+<h2>Step 1️⃣: Suspend Statistics Check</h2>
+<p><strong>Purpose</strong>: Check if suspend succeeded or failed<br />
+<strong>File</strong>: <code>/d/suspend_stats</code> → <code>suspend_stats.txt</code></p>
+<p>❌ <strong>Result</strong>: Suspend has failures
+- Suspend has failures (success: 0, fail: 0)
+- <strong>Continue to Step 2</strong> - Check for wakelocks</p>
+<h3>原始 Suspend Stats (关键片段)</h3>
+<pre><code class="language-text">fail: 0
+failed_freeze: 0
+failed_prepare: 0
+failed_suspend: 0
+failed_suspend_late: 0
+failed_suspend_noirq: 0
+failed_resume_noirq: 0
+failed_resume_early: 0
+failed_resume: 0
+failures:
+  last_failed_dev:  
+  last_failed_errno:    0
+  last_failed_step: 
+... (truncated)
+</code></pre>
+<hr />
+<h2>Step 2️⃣: Wakelock Analysis</h2>
+<p><strong>Purpose</strong>: Check for active wakelocks preventing suspend<br />
+<strong>File</strong>: <code>dumpsys suspend_control_internal</code> → <code>dumpsys_suspend.txt</code></p>
+<p>❌ <strong>Result</strong>: Active wakelocks found (ROOT CAUSE)
+<strong>Active Wakelocks</strong>:
+- <code>PowerManagerService.Display</code>
+- <code>PowerManager.SuspendLockout</code>
+- <code>a600000.hsusb</code></p>
+<p><strong>Analysis stops here</strong> - Root cause identified</p>
+<h3>原始 Wakelock Dump (关键片段)</h3>
+<pre><code class="language-text"> |                                                                                           WAKELOCK STATS                                                                                        | 
+ | NAME                           | PID    | TYPE   | STATUS   | ACTIVE COUNT | TOTAL TIME   | MAX TIME     | EVENT COUNT  | WAKEUP COUNT | EXPIRE COUNT | PREVENT SUSPEND TIME | LAST CHANGE      | 
+ | PowerManagerService.WakeLocks  |   1922 | Native | Inactive |            0 |      13204ms |       6497ms |          --- |          --- |          --- |                  --- |        1091401ms | 
+ | PowerManagerService.Broadcasts |   1922 | Native | Inactive |            0 |        168ms |        141ms |          --- |          --- |          --- |                  --- |         810554ms | 
+ | PowerManagerService.Display    |   1922 | Native | Active   |            1 |     941874ms |     653247ms |          --- |          --- |          --- |                  --- |        1099043ms | 
+ | PowerManager.SuspendLockout    |   1922 | Native | Active   |            1 |     941839ms |     653211ms |          --- |          --- |          --- |                  --- |        1099043ms | 
+ | radio-interface                |   1263 | Native | Inactive |            0 |        227ms |        217ms |          --- |          --- |          --- |                  --- |         140169ms | 
+ | ApmOutput                      |   2453 | Native | Inactive |            0 |       1023ms |         44ms |          --- |          --- |          --- |                  --- |         137884ms | 
+ | PowerManagerService.Booting    |   1922 | Native | Inactive |            0 |      52860ms |      52860ms |          --- |          --- |          --- |                  --- |         137126ms | 
+ | qms_event_Handler_wakeLock_    |   1413 | Native | Inactive |            0 |        607ms |        445ms |          --- |          --- |          --- |                  --- |         124920ms | 
+ | ApmAudio                       |   2453 | Native | Inactive |            0 |        498ms |         88ms |          --- |          --- |          --- |                  --- |         102870ms | 
+ | ApmOutput                      |   1209 | Native | Inactive |            0 |         10ms |          4ms |          --- |          --- |          --- |                  --- |          89723ms | 
+ | ApmAudio                       |   1209 | Native | Inactive |            0 |        222ms |         71ms |          --- |          --- |          --- |                  --- |          89717ms | 
+ | qcril_pre_client_init          |   1263 | Native | Inactive |            0 |       1388ms |       1388ms |          --- |          --- |          --- |                  --- |          78474ms | 
+ | event3                         |    --- | Kernel | Inactive |            4 |          3ms |          1ms |            4 |            0 |            0 |                  0ms |         810533ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | c42d000.qcom,spmi:pmw6100@0:pon_hlos@1300:pwrkey |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | usb                            |    --- | Kernel | Inactive |            2 |        144ms |         98ms |            2 |            0 |            0 |                  0ms |          78847ms | 
+ | fastrpc-non_secure             |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | rmt_storage_541074766912       |    --- | Kernel | Inactive |            2 |         78ms |         75ms |            2 |            0 |            0 |                  0ms |         167621ms | 
+... (truncated)
+</code></pre>
+<hr />
+<h2>Step 3️⃣: Kernel Log Analysis</h2>
+<p><strong>Purpose</strong>: Check for suspend entry and failure details<br />
+<strong>File</strong>: <code>dmesg -T</code> → <code>dmesg.txt</code></p>
+<p>❌ <strong>Result</strong>: No suspend entry found
+- System did not attempt to enter suspend
+- Check if suspend is triggered properly</p>
+<h3>原始 dmesg 日志 (关键片段)</h3>
+<pre><code class="language-text">[Sat Nov 15 08:23:01 2025] modprobe: Failed to insmod '/system/lib/modules/ptp_kvm.ko' with args '': Operation not supported on transport endpoint
+[Sat Nov 15 08:23:01 2025] modprobe: Failed to insmod '/system/lib/modules/ptp_kvm.ko' with args '': Operation not supported on transport endpoint
+[Sat Nov 15 08:23:01 2025] modprobe: Failed to load module /system_dlkm/lib/modules/ptp_kvm.ko: Operation not supported on transport endpoint
+[Sat Nov 15 08:23:01 2025] modprobe: Failed to load module /system_dlkm/lib/modules/ptp_kvm.ko: Operation not supported on transport endpoint
+[Sat Nov 15 08:23:01 2025] Bluetooth: Bind failed -13
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+[Sat Nov 15 08:23:03 2025] rdbg_probe: register_smp2p_out failed for rdbg_adsp
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+[Sat Nov 15 08:23:03 2025] rdbg_probe: register_smp2p_out failed for rdbg_cdsp
+[Sat Nov 15 08:23:03 2025] sdhci_msm 8844000.sdhci: nvmem cell get failed
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+[Sat Nov 15 08:23:03 2025] rdbg_probe: register_smp2p_out failed for rdbg_adsp
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+[Sat Nov 15 08:23:03 2025] rdbg_probe: register_smp2p_out failed for rdbg_cdsp
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+[Sat Nov 15 08:23:03 2025] rdbg_probe: register_smp2p_out failed for rdbg_adsp
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+[Sat Nov 15 08:23:03 2025] rdbg_probe: register_smp2p_out failed for rdbg_cdsp
+[Sat Nov 15 08:23:03 2025] sdhci_msm 8844000.sdhci: nvmem cell get failed
+[Sat Nov 15 08:23:03 2025] rdbg: failed get smem state
+... (truncated)
+</code></pre>
+<hr />
+<h2>📋 总结</h2>
+<p><strong>结论</strong>: Root cause: Active wakelocks preventing suspend: PowerManagerService.Display, PowerManager.SuspendLockout, a600000.hsusb</p>
+<hr />
+<h2>🤖 AI Comprehensive Analysis</h2>
+<p><strong>## Suspend Status</strong><br />
+- <strong>/d/suspend_stats</strong> shows <code>success: 0</code> and <code>fail: 0</code>.<br />
+- The suspend statistics report <strong>no successful suspend cycles</strong> since boot.<br />
+- The “last_failed_*” fields are empty, indicating the kernel never reached a point where it could record a failure – it simply never entered suspend.  </p>
+<p><strong>Conclusion:</strong> The device is <strong>not entering suspend</strong> at all.</p>
+<hr />
+<p><strong>## Wakelock Analysis</strong> (from <code>dumpsys suspend_control_internal</code>)</p>
+<table>
+<thead>
+<tr>
+<th>Wake‑lock name</th>
+<th>PID</th>
+<th>Type</th>
+<th>Status</th>
+<th>Active count</th>
+<th>Total time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PowerManagerService.Display</strong></td>
+<td>1922</td>
+<td>Native</td>
+<td><strong>Active</strong></td>
+<td>1</td>
+<td>~941 s</td>
+</tr>
+<tr>
+<td><strong>PowerManager.SuspendLockout</strong></td>
+<td>1922</td>
+<td>Native</td>
+<td><strong>Active</strong></td>
+<td>1</td>
+<td>~941 s</td>
+</tr>
+<tr>
+<td>PowerManagerService.Booting</td>
+<td>1922</td>
+<td>Native</td>
+<td>Inactive</td>
+<td>0</td>
+<td>52 s</td>
+</tr>
+<tr>
+<td>radio‑interface</td>
+<td>1263</td>
+<td>Native</td>
+<td>Inactive</td>
+<td>0</td>
+<td>0.2 s</td>
+</tr>
+<tr>
+<td>… <em>(all other native wake‑locks are inactive)</em></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kernel‑side wake‑locks (excerpt)</strong><br />
+- <code>eventpoll</code> (many instances) – all inactive.<br />
+- <code>usb</code>, <code>wifi</code>, <code>wlan</code>, <code>st21nfc</code> – inactive at the moment of the dump.<br />
+- No kernel “active” wake‑locks besides the generic <code>eventpoll</code> counters.</p>
+<p><strong>Key observation:</strong> The <strong>only active wake‑locks are the high‑level PowerManager ones</strong> – the display and the suspend‑lockout. No other user‑space or kernel wakelocks are holding the device awake.</p>
+<hr />
+<p><strong>## Root Cause (why suspend never succeeds)</strong>  </p>
+<ol>
+<li><strong>Display wake‑lock still held</strong>  </li>
+<li><code>PowerManagerService.Display</code> is active for almost the entire uptime (≈ 941 s).  </li>
+<li>
+<p>This indicates the system believes the screen is on (or a display‑related WAKE‑LOCK has never been released). As long as the display wake‑lock is held, the kernel will not attempt suspend.</p>
+</li>
+<li>
+<p><strong>Suspend‑Lockout active</strong>  </p>
+</li>
+<li><code>PowerManager.SuspendLockout</code> is also active for the same duration.  </li>
+<li>
+<p>The lockout is typically set by the framework when a subsystem reports it cannot safely suspend (e.g., pending I/O, driver not ready, or a “no‑sleep” flag).</p>
+</li>
+<li>
+<p><strong>Driver / firmware initialization problems that trigger the lockout</strong>  </p>
+</li>
+<li>
+<p><strong>SDIO / Wi‑Fi driver</strong>: Repeated log lines like<br />
+<code>sdhci_msm 8844000.sdhci: nvmem cell get failed
+     sdhci_msm 8844000.sdhci: SDIO dependent driver probe not complete</code><br />
+     show the SDIO‑based Wi‑Fi (and possibly other peripherals) never finish probing.<br />
+     An unfinished SDIO driver registers a <strong>suspend lockout</strong> to prevent the system from sleeping while the hardware is not ready.</p>
+</li>
+<li>
+<p><strong>Missing firmware</strong>:  </p>
+<ul>
+<li><code>regulatory.db</code> cannot be loaded (<code>Failed to load regulatory.db</code>).  </li>
+<li>Numerous ADSP/CDSP/modem firmware files (<code>adsp.mdt</code>, <code>cdsp.mdt</code>, <code>modem.mdt</code>, etc.) fall back to “sysfs fallback” and ultimately fail.  </li>
+<li>The modem and DSP subsystems stay in a “not‑ready” state, which also contributes to the suspend lockout.</li>
+</ul>
+</li>
+<li>
+<p><strong>USB gadget / UDC errors</strong>: “couldn't find an available UDC or it's busy” repeatedly appears, indicating the USB peripheral controller never fully initializes, another condition that can block suspend.</p>
+</li>
+<li>
+<p><strong>Repeated “Failed to get ddr_device_type”</strong> and other sensor‑related errors suggest additional hardware components are stuck in an error state.</p>
+</li>
+<li>
+<p><strong>Resulting behaviour</strong>  </p>
+</li>
+<li>Because the display wake‑lock never clears and the framework‑level suspend‑lockout stays asserted (driven by the unfinished SDIO/Wi‑Fi and modem/DSP subsystems), the kernel never reaches the suspend path, so <code>suspend_stats</code> never records a successful or failed suspend attempt.</li>
+</ol>
+<hr />
+<p><strong>## Recommendations (what to fix to enable suspend)</strong>  </p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Display wake‑lock</strong></td>
+<td>Verify the UI actually turns the screen off. Check for any app‑level wake‑lock (<code>android.os.PowerManager.WakeLock</code>) that might be held indefinitely (e.g., a debug‑screen‑on flag, a stuck <code>android.hardware.display</code> service). Use <code>adb shell dumpsys power</code> to list active display wake‑locks and release them.</td>
+</tr>
+<tr>
+<td><strong>Suspend‑Lockout source</strong></td>
+<td>Identify the component that called <code>PowerManagerService.acquireSuspendLock</code>. The log shows the lockout is likely set by the SDIO/Wi‑Fi driver (<code>sdhci_msm</code> errors). Fix the driver initialization so it can complete and release the lock.</td>
+</tr>
+<tr>
+<td><strong>SDIO / Wi‑Fi driver</strong></td>
+<td>- Ensure the required NVMEM cells are present in the device tree (the “nvmem cell get failed” messages indicate missing entries). <br> - Load the correct Wi‑Fi firmware (<code>regulatory.db</code>, <code>modem.mdt</code>, etc.) into <code>/vendor/firmware</code> or the appropriate partition. <br> - Verify the SDIO device tree node (<code>sdhci_msm</code>) has a valid <code>vdd</code> regulator and <code>reset</code> line.</td>
+</tr>
+<tr>
+<td><strong>Modem / DSP firmware</strong></td>
+<td>Provide the missing firmware files (<code>adsp.mdt</code>, <code>cdsp.mdt</code>, <code>modem.mdt</code>, <code>ipa_fws.mdt</code>, etc.) in the expected locations (<code>/vendor/firmware_mnt/image/</code>). Re‑flash the device with a complete firmware package or update the OTA that includes these blobs.</td>
+</tr>
+<tr>
+<td><strong>USB gadget / UDC</strong></td>
+<td>The kernel logs “couldn't find an available UDC or it's busy”. Ensure the USB controller driver (<code>dwc3</code>) is correctly bound and that a UDC (e.g., <code>gadgetfs</code> or <code>configfs</code> gadget) is available, or disable the gadget if not needed.</td>
+</tr>
+<tr>
+<td><strong>Kernel configuration</strong></td>
+<td>If the device tree is missing entries for the regulators or clocks (<code>vdd</code>, <code>core_reset</code>, <code>tcxo</code>), add them. The logs also show “TCXO clk not present (-2)”. Supplying the correct clock definitions can allow the SDHCI controller to initialize.</td>
+</tr>
+<tr>
+<td><strong>System updates</strong></td>
+<td>Apply any vendor‑provided OTA that fixes the missing NVMEM cells and includes the proper firmware packages. Often these issues are resolved by an updated <code>system.img</code>/<code>vendor.img</code>.</td>
+</tr>
+<tr>
+<td><strong>Testing after fixes</strong></td>
+<td>After applying the above changes, reboot and run: <br> <code>adb shell dumpsys power</code> → confirm <code>Display</code> and <code>SuspendLockout</code> are <strong>inactive</strong>. <br> <code>adb shell dumpsys suspend_control_internal</code> → verify no active wake‑locks. <br> <code>adb shell cat /d/suspend_stats</code> → should now show <code>success: N</code> with a non‑zero count.</td>
+</tr>
+</tbody>
+</table>
+<p>By addressing the <strong>display wake‑lock</strong>, ensuring <strong>SDIO/Wi‑Fi and modem/DSP firmware</strong> are correctly loaded, and fixing the <strong>device‑tree NVMEM/clock/regulator definitions</strong>, the system will be able to clear the suspend‑lockout and allow the kernel to enter suspend normally.</p>
+<hr />
+<h2>📁 Evidence Files</h2>
+<ul>
+<li><strong>suspend_stats.txt</strong>: <code>C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\test_case1\suspend_stats.txt</code></li>
+<li><strong>dumpsys_suspend.txt</strong>: <code>C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\test_case1\dumpsys_suspend.txt</code></li>
+<li><strong>dmesg.txt</strong>: <code>C:\Users\xingya\OneDrive - Qualcomm\Desktop\AI_tools\suspend_mvp\cases\test_case1\dmesg.txt</code></li>
+</ul>
+<hr />
+<h2>✅ Verification Checklist</h2>
+<p>After fixing the identified issue:</p>
+<ol>
+<li><strong>Re-run diagnosis</strong>: Collect new evidence and verify the issue is resolved</li>
+<li><strong>Check suspend_stats</strong>: Verify success count increases and fail count remains 0</li>
+<li><strong>Check wakelocks</strong>: Ensure no active wakelocks in dumpsys output</li>
+<li><strong>Measure power</strong>: Compare power consumption before/after fix (expect ≥3% reduction)</li>
+</ol>
+    </div>
+</body>
+</html>

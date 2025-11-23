@@ -1,0 +1,139 @@
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ |                                                                                           WAKELOCK STATS                                                                                        | 
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ | NAME                           | PID    | TYPE   | STATUS   | ACTIVE COUNT | TOTAL TIME   | MAX TIME     | EVENT COUNT  | WAKEUP COUNT | EXPIRE COUNT | PREVENT SUSPEND TIME | LAST CHANGE      | 
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ | PowerManagerService.WakeLocks  |   1922 | Native | Inactive |            0 |      13204ms |       6497ms |          --- |          --- |          --- |                  --- |        1091401ms | 
+ | PowerManagerService.Broadcasts |   1922 | Native | Inactive |            0 |        168ms |        141ms |          --- |          --- |          --- |                  --- |         810554ms | 
+ | PowerManagerService.Display    |   1922 | Native | Active   |            1 |     941874ms |     653247ms |          --- |          --- |          --- |                  --- |        1099043ms | 
+ | PowerManager.SuspendLockout    |   1922 | Native | Active   |            1 |     941839ms |     653211ms |          --- |          --- |          --- |                  --- |        1099043ms | 
+ | radio-interface                |   1263 | Native | Inactive |            0 |        227ms |        217ms |          --- |          --- |          --- |                  --- |         140169ms | 
+ | ApmOutput                      |   2453 | Native | Inactive |            0 |       1023ms |         44ms |          --- |          --- |          --- |                  --- |         137884ms | 
+ | PowerManagerService.Booting    |   1922 | Native | Inactive |            0 |      52860ms |      52860ms |          --- |          --- |          --- |                  --- |         137126ms | 
+ | qms_event_Handler_wakeLock_    |   1413 | Native | Inactive |            0 |        607ms |        445ms |          --- |          --- |          --- |                  --- |         124920ms | 
+ | ApmAudio                       |   2453 | Native | Inactive |            0 |        498ms |         88ms |          --- |          --- |          --- |                  --- |         102870ms | 
+ | ApmOutput                      |   1209 | Native | Inactive |            0 |         10ms |          4ms |          --- |          --- |          --- |                  --- |          89723ms | 
+ | ApmAudio                       |   1209 | Native | Inactive |            0 |        222ms |         71ms |          --- |          --- |          --- |                  --- |          89717ms | 
+ | qcril_pre_client_init          |   1263 | Native | Inactive |            0 |       1388ms |       1388ms |          --- |          --- |          --- |                  --- |          78474ms | 
+ | event3                         |    --- | Kernel | Inactive |            4 |          3ms |          1ms |            4 |            0 |            0 |                  0ms |         810533ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | c42d000.qcom,spmi:pmw6100@0:pon_hlos@1300:pwrkey |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | usb                            |    --- | Kernel | Inactive |            2 |        144ms |         98ms |            2 |            0 |            0 |                  0ms |          78847ms | 
+ | fastrpc-non_secure             |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | rmt_storage_541074766912       |    --- | Kernel | Inactive |            2 |         78ms |         75ms |            2 |            0 |            0 |                  0ms |         167621ms | 
+ | SMCDAEMON_WAKEUP               |    --- | Kernel | Inactive |           51 |        321ms |         82ms |           51 |            0 |            0 |                  0ms |          85417ms | 
+ |                                |    --- | Kernel | Inactive |          138 |        369ms |        229ms |          138 |            0 |            0 |                  0ms |        1086738ms | 
+ | SensorsHAL_WAKEUP              |    --- | Kernel | Inactive |           64 |        388ms |         44ms |           66 |            0 |            0 |                  0ms |          88283ms | 
+ | a98000.serial                  |    --- | Kernel | Inactive |            4 |       3068ms |       1110ms |            4 |            0 |            0 |                  0ms |          86040ms | 
+ | tftp_server_wakelock           |    --- | Kernel | Inactive |            1 |        582ms |        582ms |            1 |            0 |            0 |                  0ms |          87886ms | 
+ | alarmtimer.1.auto              |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | fastrpc-secure                 |    --- | Kernel | Inactive |           38 |        373ms |         66ms |          263 |            0 |           15 |                  0ms |          82883ms | 
+ | rmnet_ipa%d                    |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | qwesd_exp_noti_wakelock        |    --- | Kernel | Inactive |            1 |       1615ms |       1615ms |            1 |            0 |            0 |                  0ms |          53492ms | 
+ | eventpoll                      |    --- | Kernel | Inactive |          150 |          1ms |          0ms |          150 |            0 |            0 |                  0ms |        1086738ms | 
+ | sscrpcd:1081                   |    --- | Kernel | Inactive |          237 |         13ms |          2ms |          237 |            0 |            0 |                  0ms |          81310ms | 
+ | remoteproc SSR wake lock       |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | qcom_sap_wakelock              |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | 88e0000.qcom,msm-eud           |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | qrtr_ws                        |    --- | Kernel | Inactive |           76 |          0ms |          0ms |           76 |            0 |            0 |                  0ms |        1065253ms | 
+ | EMB MODEM                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | USB                            |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | 9-0039                         |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | power_state                    |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | ucsi-source-psy-soc:qcom,pmic_glink:qcom,ucsi1 |    --- | Kernel | Inactive |            3 |          9ms |          5ms |            3 |            0 |            0 |                  0ms |          80317ms | 
+ | remoteproc SSR wake lock       |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | qcom_rx_wakelock               |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | IPA_CLIENT_APPS_WAN_LOW_LAT_CONS |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | IPA_CLIENT_APPS_LAN_CONS       |    --- | Kernel | Inactive |            4 |        666ms |        184ms |            4 |            0 |            0 |                  0ms |          78385ms | 
+ | event1                         |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | ODL                            |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            4 |         36ms |         20ms |            4 |            0 |            0 |                  0ms |         149792ms | 
+ | soc:qcom,pmic_glink            |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | soc:qcom,pmic_glink:qcom,battery_charger |    --- | Kernel | Inactive |            2 |        102ms |         51ms |            3 |            0 |            2 |                  0ms |          80860ms | 
+ | remoteproc SSR wake lock       |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | kickstart                      |    --- | Kernel | Inactive |            3 |        452ms |        343ms |            3 |            0 |            0 |                  0ms |          73811ms | 
+ | IPA_CLIENT_APPS_WAN_CONS       |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | event2                         |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | soc:qcom,qcn-sdio              |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | c42d000.qcom,spmi:pmw6100@0:pon_hlos@1300:resin |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | wireless                       |    --- | Kernel | Inactive |            1 |        109ms |        109ms |            1 |            0 |            0 |                  0ms |          78770ms | 
+ | adsp-smp2p-sleepstate          |    --- | Kernel | Inactive |            1 |        197ms |        197ms |            1 |            0 |            1 |                  0ms |          78472ms | 
+ | fastrpc-secure                 |    --- | Kernel | Inactive |           23 |          0ms |          0ms |           23 |            0 |            0 |                  0ms |          74527ms | 
+ | rmt_storage_530046749760       |    --- | Kernel | Inactive |            2 |         53ms |         48ms |            2 |            0 |            0 |                  0ms |          77121ms | 
+ | eventpoll                      |    --- | Kernel | Inactive |          260 |          1ms |          0ms |          260 |            0 |            0 |                  0ms |        1075797ms | 
+ | event4                         |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | st21nfc                        |    --- | Kernel | Inactive |            3 |       7719ms |       4233ms |          124 |            0 |            3 |                  0ms |         813436ms | 
+ | eventpoll                      |    --- | Kernel | Inactive |           42 |          0ms |          0ms |           42 |            0 |            0 |                  0ms |        1091400ms | 
+ | a600000.hsusb                  |    --- | Kernel | Active   |            1 |    1018798ms |    1018798ms |            1 |            0 |            0 |                  0ms |          80272ms | 
+ | audio-gpr                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | qrtr_ws                        |    --- | Kernel | Inactive |           42 |          0ms |          0ms |           42 |            0 |            0 |                  0ms |        1064981ms | 
+ | qrtr_ws                        |    --- | Kernel | Inactive |          693 |          0ms |          0ms |          693 |            0 |            0 |                  0ms |        1075796ms | 
+ | qwesd_exp_wakelock             |    --- | Kernel | Inactive |            2 |       5177ms |       3314ms |            2 |            0 |            0 |                  0ms |          79700ms | 
+ | inotify                        |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | wm-smp2p-sleepstate            |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | monitor_mode_wakelock          |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | c42d000.qcom,spmi:pmw6100@0:rtc@6400 |    --- | Kernel | Inactive |            1 |          0ms |          0ms |            1 |            0 |            0 |                  0ms |         117389ms | 
+ | LPI_GLINK_WAKEUP               |    --- | Kernel | Inactive |          581 |       1779ms |         22ms |          585 |            0 |            0 |                  0ms |         141380ms | 
+ | TETH MODEM                     |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | MODEM (USB RMNET)              |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | wlan                           |    --- | Kernel | Inactive |            3 |       1691ms |       1524ms |            3 |            0 |            0 |                  0ms |          85382ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |            2 |         27ms |         27ms |            2 |            0 |            0 |                  0ms |         117416ms | 
+ | 32300000.remoteproc-cdsp       |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | sap_dfs_wakelock               |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | RMNET_SHS                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | rmnet_ctl                      |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | event0                         |    --- | Kernel | Inactive |            8 |         28ms |         17ms |            8 |            0 |            0 |                  0ms |         811510ms | 
+ | 0.qcom,mdss_mdp                |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | [timerfd]                      |    --- | Kernel | Inactive |           36 |        247ms |         25ms |           36 |            0 |            0 |                  0ms |        1091400ms | 
+ | soc:qcom,pmic_glink_log        |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | 4080000.remoteproc-mss         |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | pmo_wow_wl                     |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | NETLINK                        |    --- | Kernel | Inactive |          260 |        175ms |         10ms |          260 |            0 |            0 |                  0ms |        1075797ms | 
+ | IPA_WS                         |    --- | Kernel | Inactive |            4 |        261ms |         78ms |            4 |            0 |            0 |                  0ms |          78280ms | 
+ | soc:gpio_key                   |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | battery                        |    --- | Kernel | Inactive |            2 |        347ms |        285ms |            3 |            0 |            0 |                  0ms |          80870ms | 
+ | 3000000.remoteproc-adsp        |    --- | Kernel | Inactive |            0 |          0ms |          0ms |            0 |            0 |            0 |                  0ms |              0ms | 
+ | qwesd_qmi_wakelock             |    --- | Kernel | Inactive |            1 |        533ms |        533ms |            1 |            0 |            0 |                  0ms |          77854ms | 
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Wakeups:
+
+
+----- Suspend Stats -----
+success: 0
+fail: 0
+failed_freeze: 0
+failed_prepare: 0
+failed_suspend: 0
+failed_suspend_late: 0
+failed_suspend_noirq: 0
+failed_resume: 0
+failed_resume_early: 0
+failed_resume_noirq: 0
+last_hw_sleep: 0
+total_hw_sleep: 0
+max_hw_sleep: 0
+
+Last Failures:
+    last_failed_dev: 
+    last_failed_errno: 0
+    last_failed_step: 
+----------
+
+
+Suspend Info:
+suspend attempts: 0
+failed suspends: 0
+short suspends: 0
+total suspend time: 0 ms
+short suspend time: 0 ms
+suspend overhead: 0 ms
+failed suspend overhead: 0 ms
+new backoffs: 0
+backoff continuations: 0
+total sleep time between suspends: 0 ms
+

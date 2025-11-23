@@ -15,18 +15,13 @@ class QGenieReporter:
     """
     Calls the QGenie LLM service and returns text analysis results.
     
-    The `endpoint` parameter is kept for compatibility but doesn't affect the actual call.
-    If empty, the default QGenie configuration will be used.
+    Uses the default QGenie configuration for analysis.
     """
 
-    def __init__(self, endpoint: Optional[str] = None):
+    def __init__(self):
         """
-        Initialize the QGenie reporter.
-        
-        Args:
-            endpoint: Optional QGenie endpoint URL (not used in current implementation)
+        Initialize the QGenie reporter with default configuration.
         """
-        self.endpoint = endpoint
         self.client = QGenieClient(max_retries=1, debug=True)
 
     def generate(self, logs: LogMap) -> Optional[str]:

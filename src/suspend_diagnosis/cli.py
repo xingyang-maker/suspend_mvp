@@ -35,15 +35,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     
     parser.add_argument(
-        "--ai-endpoint", 
-        default="", 
-        help="QGenie LLM endpoint URL (empty to use default configuration)"
-    )
-    
-    parser.add_argument(
         "--case-dir",
         default="",
-        help="Path to a directory containing pre‑collected log files (overrides ADB collection)"
+        help="Path to a directory containing pre-collected log files (dmesg.txt, dumpsys_suspend.txt, suspend_stats.txt). When specified, analyzes existing logs instead of collecting from device."
     )
     
     return parser

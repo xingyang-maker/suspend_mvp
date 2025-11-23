@@ -52,18 +52,22 @@ def main(args):
         txts.get("suspend_stats.txt", "")
     )
     
-    # Step 4: AI analysis using QGenieReporter
-    reporter = QGenieReporter(endpoint=args.ai_endpoint)
-    logs: LogMap = {
-        "dmesg": txts.get("dmesg.txt", ""),
-        "dumpsys_suspend": txts.get("dumpsys_suspend.txt", ""),
-        "suspend_stats": txts.get("suspend_stats.txt", ""),
-    }
-    ai_md = reporter.generate(logs)
-    
-    if ai_md:
-        print("\n[AI RESPONSE]")
-        print(ai_md)
+    # Step 4: AI analysis using QGenieReporter (optional)
+    ai_md = None
+    try:
+        reporter = QGenieReporter()
+        logs: LogMap = {
+            "dmesg": txts.get("dmesg.txt", ""),
+            "dumpsys_suspend": txts.get("dumpsys_suspend.txt", ""),
+            "suspend_stats": txts.get("suspend_stats.txt", ""),
+        }
+        ai_md = reporter.generate(logs)
+        
+        if ai_md:
+            print("\n[AI RESPONSE]")
+            print(ai_md)
+    except Exception as e:
+        print(f"\n[WARN] AI analysis skipped: {e}")
     
     # Step 5: Generate Markdown report
     md_builder = MarkdownBuilder()

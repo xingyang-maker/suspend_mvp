@@ -88,7 +88,8 @@ This will collect logs from the default connected device and generate a report i
 ### Command-line Options
 
 ```
-usage: suspend-diagnosis [-h] [--adb ADB] [--device DEVICE] [--out OUT] [--ai-endpoint AI_ENDPOINT]
+usage: suspend-diagnosis [-h] [--adb ADB] [--device DEVICE] [--out OUT] 
+                         [--case-dir CASE_DIR]
 
 Android Suspend Diagnosis Tool
 
@@ -97,25 +98,40 @@ options:
   --adb ADB             Path to ADB executable (default: 'adb')
   --device DEVICE       Target device serial number (empty for default device)
   --out OUT             Output directory for reports (default: './reports')
-  --ai-endpoint AI_ENDPOINT
-                        QGenie LLM endpoint URL (empty to use default configuration)
+  --case-dir CASE_DIR   Path to a directory containing pre-collected log files 
+                        (dmesg.txt, dumpsys_suspend.txt, suspend_stats.txt).
+                        When specified, the tool will analyze existing logs 
+                        instead of collecting new ones from a device.
 ```
 
 ### Examples
 
-Collect logs from a specific device:
+**Collect logs from the default connected device:**
+```bash
+python bin/suspend_diagnosis
+```
+
+**Collect logs from a specific device:**
 ```bash
 python bin/suspend_diagnosis --device DEVICE_SERIAL_NUMBER
 ```
 
-Or if installed as a package:
+**Analyze pre-collected logs from a local directory:**
 ```bash
-suspend-diagnosis --device DEVICE_SERIAL_NUMBER
+python bin/suspend_diagnosis --case-dir ./cases/test_case1
 ```
 
-Specify a custom output directory:
+This is useful when you have already saved logs and want to re-analyze them without 
+reconnecting to the device.
+
+**Specify a custom output directory:**
 ```bash
-suspend-diagnosis --out /path/to/output/directory
+python bin/suspend_diagnosis --out /path/to/output/directory
+```
+
+**Combine options:**
+```bash
+python bin/suspend_diagnosis --case-dir ./cases/test_case1 --out ./my_reports
 ```
 
 ## Report Structure
