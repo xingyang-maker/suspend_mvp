@@ -10,11 +10,11 @@ import argparse
 import sys
 from pathlib import Path
 
-from suspend_diagnosis.core.collector import AdbEvidenceCollector
+from common.collector import AdbEvidenceCollector
 from suspend_diagnosis.core.analyzer import SimpleAnalyzer
-from suspend_diagnosis.core.ai import QGenieReporter
-from suspend_diagnosis.core.report.markdown_builder import MarkdownBuilder
-from suspend_diagnosis.core.report.html_renderer import HtmlRenderer
+from common.ai import QGenieReporter
+from common.report.markdown_builder import MarkdownBuilder
+from common.report.html_renderer import HtmlRenderer
 from suspend_diagnosis.cli import build_parser
 from common.types import LogMap
 
